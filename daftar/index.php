@@ -120,16 +120,7 @@ if (isset($_POST['signup'])) {
     <script src="../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
-    <script type="text/javascript">
-    if (screen.width <= 699) {
-      window.location = "<?php echo $cfg_baseurl; ?>/mobile/daftar";
-    } else {
-      var userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.indexOf("iphone") !== -1 || userAgent.indexOf("ipod") !== -1) {
-        window.location.replace("<?php echo $cfg_baseurl; ?>/mobile/daftar");
-      }
-    }
-  </script>
+    
   </head>
 
   <body>

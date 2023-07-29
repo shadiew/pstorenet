@@ -133,16 +133,7 @@ if (isset($_POST['login'])) {
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?php echo $cfg_baseurl; ?>/assets/js/config.js"></script>
     <?php echo $data_settings['seo_analytics']; ?>
-    <script type="text/javascript">
-    if (screen.width <= 699) {
-      window.location = "<?php echo $cfg_baseurl; ?>/mobile/login";
-    } else {
-      var userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.indexOf("iphone") !== -1 || userAgent.indexOf("ipod") !== -1) {
-        window.location.replace("<?php echo $cfg_baseurl; ?>/mobile/login");
-      }
-    }
-  </script>
+    
 
   </head>
 
