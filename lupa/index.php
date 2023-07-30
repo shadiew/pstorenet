@@ -1,86 +1,55 @@
 <?php
 session_start();
 require("../lib/mainconfig.php");
-
 $check_settings = mysqli_query($db, "SELECT * FROM settings WHERE id = '1'");
 $data_settings = mysqli_fetch_assoc($check_settings);
 $msg_type = "nothing";
 
-$connection = mysqli_connect($db_server, $db_user, $db_password, $db_name);
-
-// Memastikan koneksi berhasil
-if (!$connection) {
-    die("Koneksi database gagal: " . mysqli_connect_error());
-}
-
-$msg_type = "";
-$msg_content = "";
-
-// Menghandle aksi reset password
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = sanitizeInput($_POST["username"]);
-    $email = sanitizeInput($_POST["email"]);
-    $password = sanitizeInput($_POST["password"]);
-    $confirmPassword = sanitizeInput($_POST["confirm_password"]);
-
-    // Memeriksa apakah username dan email cocok
-    $query = "SELECT * FROM users WHERE username = '$username' AND email = '$email'";
-    $result = mysqli_query($connection, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        // Memeriksa apakah password dan konfirmasi password cocok
-        if ($password === $confirmPassword) {
-            // Memeriksa panjang minimal password (misalnya minimal 6 karakter)
-            if (strlen($password) >= 6) {
-                // Enkripsi password menggunakan Bcrypt
-                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-                // Mengupdate password baru berdasarkan username dan email
-                $query = "UPDATE users SET password = '$hashedPassword' WHERE username = '$username' AND email = '$email'";
-                $result = mysqli_query($connection, $query);
-
-                if ($result) {
-                    // Password berhasil direset
-                    $msg_type = "success";
-                    $msg_content = "Password berhasil direset.";
-                } else {
-                    // Password gagal direset
-                    $msg_type = "error";
-                    $msg_content = "Gagal mereset password.";
-                }
-            } else {
-                // Password tidak memenuhi panjang minimal
-                $msg_type = "error";
-                $msg_content = "Password harus memiliki minimal 6 karakter.";
-            }
-        } else {
-            // Password dan konfirmasi password tidak cocok
-            $msg_type = "error";
-            $msg_content = "Password dan konfirmasi password tidak cocok.";
-        }
-    } else {
-        // Username dan email tidak cocok
+if (isset($_POST['submit'])) {
+    $post_email = trim($_POST['email']);
+    $post_username = trim($_POST['username']);
+    $check_email = mysqli_query($db, "SELECT * FROM users WHERE email = '$post_email'");
+    $data_email = mysqli_fetch_assoc($check_email);
+    $check_username = mysqli_query($db, "SELECT * FROM users WHERE username = '$post_username'");
+    $data_username = mysqli_fetch_assoc($check_username);
+    $nama = $data_username['name'];
+    $emailnya = $data_username['email'];
+    $check_email = mysqli_query($db, "SELECT * FROM users WHERE email = '$post_email'");
+    $data_email = mysqli_fetch_assoc($check_email);
+    if (empty($post_email) || empty($post_username)) {
         $msg_type = "error";
-        $msg_content = "Username dan email tidak cocok.";
+        $msg_content = "Please Fill In All Inputs.";
+    } else if ($post_email <> $data_email['email']) {
+        $msg_type = "error";
+        $msg_content = "The Emails You Enter Are Not Registered With Any Account.";
+    } else if ($post_username <> $data_username['username']) {
+        $msg_type = "error";
+        $msg_content = "The Emails You Enter Are Not Registered With Any Account.";
+    } else if ($post_email <> $data_username['email']) {
+        $msg_type = "error";
+        $msg_content = "<script>swal('Error!', 'Email is not appropriate.', 'error');</script> Email is not appropriate.";
+    } else {
+        $to = $post_email;
+        $new_password = random(8);
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $msg = "<hr></hr><br>Hallo <b> $post_username </b>,<br>Your account password is <b>$new_password</b><br><hr></hr><br>You Have Used the Forgot Password Feature, If used without your knowledge, please be careful of any messages that address our Admin and ask for a Screenshot or Request a Password from This Inbox, Our Party Never Requests a Password with Unclear Things<br><hr></hr><br>You cannot contact this Noreply message, Please Contact Admin Contact Through the Application or via Ticket. <br><br>Thanks.<br><hr></hr>";
+        $subject = "Forgot Password";
+        $headers = "From: SMM PANEL <$email_webmail_forgot> \r\n";
+        $headers .= "Cc:$email_webmail_forgot \r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html\r\n";
+        mail($to, $subject, $msg, $headers);
+        $send = mysqli_query($db, "UPDATE users SET password = '$hashed_password' WHERE username = '$post_username'");
+        if ($send == true) {
+            $msg_type = "success";
+            $msg_content = "Anda Berhasil Mereset Password";
+        } else {
+            $msg_type = "error";
+            $msg_content = "<script>swal('Error!', 'Error system (1).', 'error');</script><b>Failed:</b> Error system (1).";
+        }
     }
 }
-
-// Menutup koneksi database
-mysqli_close($connection);
-
-// Fungsi untuk membersihkan input dari karakter khusus
-function sanitizeInput($input)
-{
-    $input = trim($input);
-    $input = stripslashes($input);
-    $input = htmlspecialchars($input);
-    return $input;
-}
-
-
 ?>
-
-
 <!DOCTYPE html>
 
 <html
@@ -221,26 +190,6 @@ function sanitizeInput($input)
                     
                     name="email"
                     placeholder="Enter your email"
-                    autofocus />
-                </div>
-                <div class="mb-3">
-                  <labelclass="form-label">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    
-                    name="password"
-                    placeholder="Password"
-                    autofocus />
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Konfirmasi Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    
-                    name="confirm_password"
-                    placeholder="Password"
                     autofocus />
                 </div>
                 
