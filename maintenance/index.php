@@ -1,8 +1,14 @@
-
+<?php
+session_start();
+require("../lib/config.php");
+require("../lib/database.php");
+require("../lib/function.php");
+$check_settings = mysqli_query($db, "SELECT * FROM settings WHERE id = '1'");
+$data_settings = mysqli_fetch_assoc($check_settings);
+?>
 <!DOCTYPE html>
-
 <html
-  lang="en"
+  lang="id"
   class="light-style customizer-hide"
   dir="ltr"
   data-theme="theme-default"
@@ -14,12 +20,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Under Maintenance - Pages | Vuexy - Bootstrap Admin Template</title>
+    <title>Under Maintenance | <?php echo $data_settings['web_name']; ?></title>
 
-    <meta name="description" content="" />
+    
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?php echo $data_settings['link_fav']; ?>" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,6 +60,10 @@
     <script src="../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <?php echo $data_settings['seo_meta']; ?>
+    <?php echo $data_settings['seo_analytics']; ?>
+    <meta name="description" content="<?php echo $data_settings['web_description']; ?>">
+    <meta name="keywords" content="<?php echo $data_settings['seo_keywords']; ?>">
   </head>
 
   <body>
@@ -69,7 +79,7 @@
           <img
             src="../assets/img/illustrations/page-misc-under-maintenance.png"
             alt="page-misc-under-maintenance"
-            width="550"
+            width="350"
             class="img-fluid" />
         </div>
       </div>
