@@ -43,9 +43,9 @@ require("database.php");
 require("function.php");
 
 // TRIPAY
-$tripay_merchant_code = "T3192";
-$tripay_private_key = "K0dK6-FORV7-7XVJB-h87I5-afVdC";
-$tripay_api_key = "5hKzdcI7eQictTF0NbS8kAtdvdnLkzUXuou0WNrW";
+$tripay_merchant_code = "T6105";
+$tripay_private_key = "ufjo4-zrQWR-luKpx-NdFIv-uXIc8";
+$tripay_api_key = "DEV-BVgsWZb6G3ZQehNcOAPvyW7y54bqdRnGVeX2cIe0";
 
 function rupiah($angka)
 {

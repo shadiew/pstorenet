@@ -167,12 +167,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Halaman</span>
             </li>
-            <li class="menu-item <?php echo ($page == 'slider') ? 'active' : ''; ?>">
-              <a href="<?php echo $cfg_baseurl; ?>/admin/slider" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-mouse"></i>
-                <div data-i18n="Slider Apps">Slider Apps</div>
-              </a>
-            </li>
+            
             <li class="menu-item <?php echo ($page == 'tiket') ? 'active' : ''; ?>">
               <a href="<?php echo $cfg_baseurl; ?>/admin/tiket" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-mail"></i>
@@ -185,18 +180,8 @@
                 <div data-i18n="News">News</div>
               </a>
             </li>
-            <li class="menu-item <?php echo ($page == 'blog') ? 'active' : ''; ?>">
-              <a href="<?php echo $cfg_baseurl; ?>/admin/blog" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-pencil"></i>
-                <div data-i18n="Blog">Blog</div>
-              </a>
-            </li>
-            <li class="menu-item <?php echo ($page == 'livetv') ? 'active' : ''; ?>">
-              <a href="<?php echo $cfg_baseurl; ?>/admin/livetv" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-rss"></i>
-                <div data-i18n="Live TV">Live TV</div>
-              </a>
-            </li>
+            
+            
             <li class="menu-item">
               <a href="<?php echo $cfg_baseurl; ?>/" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>

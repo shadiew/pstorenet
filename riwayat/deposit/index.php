@@ -218,7 +218,7 @@ if (isset($_SESSION['user'])) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            
+                            <div id="data" style="margin: 10px;"></div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>

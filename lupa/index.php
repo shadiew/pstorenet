@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         $msg = "<hr></hr><br>Hallo <b> $post_username </b>,<br>Your account password is <b>$new_password</b><br><hr></hr><br>You Have Used the Forgot Password Feature, If used without your knowledge, please be careful of any messages that address our Admin and ask for a Screenshot or Request a Password from This Inbox, Our Party Never Requests a Password with Unclear Things<br><hr></hr><br>You cannot contact this Noreply message, Please Contact Admin Contact Through the Application or via Ticket. <br><br>Thanks.<br><hr></hr>";
         $subject = "Forgot Password";
-        $headers = "From: SMM PANEL <$email_webmail_forgot> \r\n";
+        $headers = "From: SMM PANEL <$email_webmail_forgot> \r\n"; //ganti Nama Pengirim
         $headers .= "Cc:$email_webmail_forgot \r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-type: text/html\r\n";
