@@ -37,7 +37,7 @@ $page = 'doc';
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Tabs and pills - UI elements | Vuexy - Bootstrap Admin Template</title>
+    <title>Dokumentasi API | <?php echo $data_settings['web_name']; ?></title>
 
     <meta name="description" content="" />
 
@@ -192,7 +192,7 @@ $page = 'doc';
                               </tr>
                               <tr>
                                 <td>service</td>
-                                <td>Service ID <a href="<?php echo $cfg_baseurl; ?>/services">Check at price list</a></td>
+                                <td>Service ID <a href="<?php echo $cfg_baseurl; ?>/harga">Check at price list</a></td>
                               </tr>
                               <tr>
                                 <td>link</td>
