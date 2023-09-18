@@ -10,7 +10,7 @@ if ($cfg_baseurl == "enter_base_url") {
 }
 
 $cfg_mt = 0; // Maintenance? 1 = yes 0 = no
-if ($cfg_mt == 0) {
+if ($cfg_mt == 1) {
     header("Location: " . $cfg_baseurl . "/maintenance");
 }
 
