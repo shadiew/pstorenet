@@ -175,7 +175,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                         
                         
-                        <button type="submit" name="edit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" name="edit" class="btn btn-primary">Update</button>
                         <a href="../user" class="btn btn-info">Kembali</a>
                       </form>
                     </div>
