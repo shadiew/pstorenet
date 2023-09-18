@@ -144,7 +144,7 @@ if (isset($_SESSION['user'])) {
                           <div class="row g-3">
                             <div class="col-md-12">
                               <label class="form-label">API Link</label>
-                              <input type="text" name="link" class="form-control" placeholder="https://buzzerpanel.id/api/json.php" />
+                              <input type="text" name="link" class="form-control" value="https://buzzerpanel.id/api/json.php" />
                             </div>
                           </div>
 
